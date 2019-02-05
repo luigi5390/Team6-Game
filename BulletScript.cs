@@ -11,17 +11,23 @@ public class BulletScript : MonoBehaviour
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        //Vector2 direction = transform.TransformDirection(Vector3.forward * speed * 100);
-        //rb2d.velocity = transform.forward.normalized * speed;
-        //rb2d.AddForce(transform.up * 5000 * speed);
-        rb2d.velocity = new Vector2(0, speed);
-        //transform.position += transform.forward * Time.deltaTime * speed;
-
+        Vector3 direction = transform.up;
+        rb2d.velocity = direction * speed;
     }
 
     // Update is called once per frame
     void OnBecameInvisible()
     {
+        Destroy(gameObject);
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            Physics2D.IgnoreCollision(collision.collider, this.gameObject.GetComponent<Collider2D>());
+        }
+
+        Destroy(collision.gameObject);
         Destroy(gameObject);
     }
 }
