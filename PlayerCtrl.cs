@@ -11,6 +11,7 @@ public class PlayerCtrl : MonoBehaviour
     public Rigidbody2D chargedbulletPrefab;
     //public float fireRate;
     public float chargeRate;
+    public float laserRate;
     public float laserLength;
 
 
@@ -68,7 +69,7 @@ public class PlayerCtrl : MonoBehaviour
         else
         {
             isCharging = false;
-            if (nextCharge > 4 * chargeRate)
+            if (nextCharge > laserRate/*4 * chargeRate*/)
             {
                 isLaser = true;
                 nextCharge = 0;
